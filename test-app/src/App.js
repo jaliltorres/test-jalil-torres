@@ -63,12 +63,9 @@ class App extends Component {
     .then(data => {
       this.setState({order: data})
       this.setState({viewOrder: true})
-
-      let t = data.map(product => {
-        return product.total
-      }).reduce((a,b) => a+b)
-
-      this.setState({total: t})
+      
+      let t =  data.reduce((a,b) => ({total: a.total + b.total}));
+      this.setState({total: t.total})
     })
     .catch(error => {
       console.log(error)
